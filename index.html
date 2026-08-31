@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TUI Airways</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+<div id="home" class="home-page">
+   <img
+    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80"
+    alt="Tropical beach"
+    class="home-banner"
+> 
+     <div class="hero-content">
+    <h1 class="home-title">✈️ TUI AIRWAYS</h1>
+
+    <p class="welcome-text">
+        Welcome to our official TUI website!
+    </p>
+
+    <button class="book-button" onclick="startBooking()">
+        Book a Flight
+    </button>
+    </div>
+
+    <footer class="site-footer">
+        <button>Careers — Coming Soon!</button>
+
+        <button onclick="window.open('https://discord.gg/5BpzyyKPZ', '_blank')">
+            Discord Server
+        </button>
+
+        <button onclick="showOwner()">
+            Owner of TUI | PTFS
+        </button>
+    </footer>
+
+</div>
+
+
+<div id="loadingScreen" style="display: none;">
+    <h1>One Moment!</h1>
+</div>
+
+
+<!-- FIRST BOOKING SCREEN -->
+
+<div id="booking" style="display: none; text-align: center;">
+ <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1600&q=80" alt="Rome, Italy" class="holiday-banner">
+    <h2>✈️ Book Your TUI Airways Flight</h2>
+    <div class="booking-box">
+    <label>Departure</label>
+<select id="departure" onchange="checkBookingOptions()">
+    <option value="">Select departure</option>
+    <option value="Glasgow">Glasgow</option>
+    <option value="Birmingham">Birmingham</option>
+    <option value="Manchester">Manchester</option>
+    <option value="London Gatwick">London Gatwick</option>
+</select>
+
+<br><br>
+
+<label>Destination</label>
+<select id="destination" onchange="checkBookingOptions()">
+    <option value="">Select destination</option>
+    <option value="Palma">Palma</option>
+    <option value="Tenerife">Tenerife</option>
+    <option value="Cancún">Cancún</option>
+    <option value="Antalya">Antalya</option>
+</select>
+
+<br><br>
+
+<label>Nights</label>
+<select id="nights" onchange="checkBookingOptions()">
+    <option value="">Select nights</option>
+    <option value="3">3 nights</option>
+    <option value="5">5 nights</option>
+    <option value="7">7 nights</option>
+    <option value="10">10 nights</option>
+    <option value="14">14 nights</option>
+</select>
+
+<br><br>
+
+<label>People</label>
+<select id="people" onchange="checkBookingOptions()">
+    <option value="">Select people</option>
+    <option value="1">1 person</option>
+    <option value="2">2 people</option>
+    <option value="3">3 people</option>
+    <option value="4">4 people</option>
+    <option value="5">5 people</option>
+</select>
+  <br><br>
+
+<button id="bookingContinue" onclick="continueToPersonalInfo()" style="display: none;">
+    Continue
+</button>
+
+<br><br>
+
+<button id="bookingContinue" onclick="continueToPersonalInfo()" style="display: none;">
+
+    Continue
+
+</button>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+
+ 
+
+
+<!-- PERSONAL INFORMATION -->
+<div id="personalInfo" style="display: none;">
+    <div class="passenger-box">
+        <h3>✈️ Your Trip</h3>
+        <p id="tripSummary">Your trip details will appear here.</p>
+       <h2>👤 Passenger Information</h2>
+        <p>Please enter your details below.</p>
+        <label>Name</label>
+        <small>(Discord user)</small>
+        <input
+    type="text"
+    id="passengerName"
+    placeholder="Enter your name"
+    oninput="checkBookingInfo()"
+>
+     <label>Travel Date</label>
+     <input
+    type="date"
+    id="flightDate"
+    onchange="checkBookingInfo()"
+>
+    <button
+    id="doneButton"
+    onclick="searchFlights()"
+    style="display: none;"
+>
+    Continue
+</button>
+</div>
+</div>
+
+
+<!-- CREDITS -->
+
+<div id="credits" style="display: none;">
+
+    <h2>📜 Credits</h2>
+
+    <p><strong>TUI Airways | PTFS</strong></p>
+
+    <p>Owner / Chairman / Founder: Matyas Jicha</p>
+
+    <p>Day of Creation: 25/8/26</p>
+
+    <p>More coming soon...</p>
+
+    <p>Thank you for visiting our website! ✈️</p>
+
+    <button onclick="hideCredits()">
+        Back
+    </button>
+
+</div>
+
+
+<!-- AVAILABLE FLIGHTS -->
+
+<div id="flights"></div>
+
+
+<!-- OWNER -->
+
+<div id="owner" style="display: none;">
+
+    <h2>Owner of TUI | PTFS</h2>
+
+    <button onclick="window.open('https://www.roblox.com/users/910280857/profile', '_blank')">
+        Go to my Roblox Profile
+    </button>
+
+    <button>
+        Go to my Discord Profile
+    </button>
+
+    <button onclick="showCredits()">
+        Credits
+    </button>
+
+    <br><br>
+
+    <button onclick="hideOwner()">
+        Back to Home
+    </button>
+
+</div>
+
+
+<script>
+
+let selectedFlight = {};
+let selectedSeat = "";
+function checkBookingOptions() {
+    const departure = document.getElementById("departure").value;
+    const destination = document.getElementById("destination").value;
+    const nights = document.getElementById("nights").value;
+    const people = document.getElementById("people").value;
+    const button = document.getElementById("bookingContinue");
+
+    if (departure && destination && nights && people) {
+        button.style.display = "inline-block";
+    } else {
+        button.style.display = "none";
+    }
+}
+
+
+function startBooking() {
+
+    document.getElementById("home").style.display = "none";
+
+    document.getElementById("loadingScreen").style.display = "flex";
+
+    setTimeout(function() {
+
+        document.getElementById("loadingScreen").classList.add("slide-out");
+
+        setTimeout(function() {
+
+            document.getElementById("loadingScreen").style.display = "none";
+
+            document.getElementById("booking").style.display = "block";
+
+        }, 500);
+
+    }, 2000);
+
+}
+
+
+function continueToPersonalInfo() {
+  const departure = document.getElementById("departure").value;
+const destination = document.getElementById("destination").value;
+const nights = document.getElementById("nights").value;
+const people = document.getElementById("people").value;
+document.getElementById("tripSummary").textContent =
+    departure + " → " + destination + " · " + nights + " nights · " + people + " people";
+    document.getElementById("booking").style.display = "none";
+
+    document.getElementById("personalInfo").style.display = "block";
+
+}
+
+
+function checkBookingInfo() {
+
+    const name = document.getElementById("passengerName").value;
+
+    const date = document.getElementById("flightDate").value;
+
+    const doneButton = document.getElementById("doneButton");
+
+    if (name.trim() !== "" && date !== "") {
+
+        doneButton.style.display = "inline-block";
+
+    } else {
+
+        doneButton.style.display = "none";
+
+    }
+
+}
+
+
+function showOwner() {
+
+    document.getElementById("home").style.display = "none";
+
+    document.getElementById("owner").style.display = "block";
+
+}
+
+
+function hideOwner() {
+
+    document.getElementById("owner").style.display = "none";
+
+    document.getElementById("home").style.display = "block";
+
+}
+
+
+function showCredits() {
+
+    document.getElementById("owner").style.display = "none";
+
+    document.getElementById("credits").style.display = "block";
+
+}
+
+
+function hideCredits() {
+
+    document.getElementById("credits").style.display = "none";
+
+    document.getElementById("owner").style.display = "block";
+
+}
+
+
+function searchFlights() {
+
+    document.getElementById("personalInfo").style.display = "none";
+
+    document.getElementById("flights").innerHTML = `
+
+        <h2>Available Flights</h2>
+
+        <div class="flight-card">
+
+            <h3>✈️ TUI AIRWAYS — TOM101</h3>
+
+            <h2>GLASGOW → PALMA</h2>
+
+            <p>09:30 · Boeing 737</p>
+
+            <button onclick="selectFlight('TOM101', 'Boeing 737', 'Glasgow', 'Palma', '09:30')">
+                Select Flight
+            </button>
+
+        </div>
+
+
+        <div class="flight-card">
+
+            <h3>✈️ TUI AIRWAYS — TOM205</h3>
+
+            <h2>GLASGOW → TENERIFE</h2>
+
+            <p>14:15 · Boeing 737</p>
+
+            <button onclick="selectFlight('TOM205', 'Boeing 737', 'Glasgow', 'Tenerife', '14:15')">
+                Select Flight
+            </button>
+
+        </div>
+
+
+        <div class="flight-card">
+
+            <h3>✈️ TUI AIRWAYS — TOM305</h3>
+
+            <h2>BIRMINGHAM → CANCÚN</h2>
+
+            <p>10:45 · Boeing 787</p>
+
+            <button onclick="selectFlight('TOM305', 'Boeing 787', 'Birmingham', 'Cancún', '10:45')">
+                Select Flight
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+function selectFlight(flightNumber, aircraft, from, to, time) {
+
+    selectedFlight = {
+
+        flightNumber: flightNumber,
+        aircraft: aircraft,
+        from: from,
+        to: to,
+        time: time
+
+    };
+
+
+    document.getElementById("flights").innerHTML = `
+
+        <h2>Choose Your Seat</h2>
+
+        <p><b>${flightNumber}</b> — ${aircraft}</p>
+
+        <p id="selectedSeat">No seat selected</p>
+
+        <p>${from} → ${to} · ${time}</p>
+
+
+        <div class="seat-row">
+
+            <button class="seat" onclick="chooseSeat('1A')">1A</button>
+
+            <button class="seat taken" disabled>1B</button>
+
+            <span class="aisle"></span>
+
+            <button class="seat" onclick="chooseSeat('1C')">1C</button>
+
+            <button class="seat" onclick="chooseSeat('1D')">1D</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <button class="seat" onclick="chooseSeat('2A')">2A</button>
+
+            <button class="seat" onclick="chooseSeat('2B')">2B</button>
+
+            <span class="aisle"></span>
+
+            <button class="seat taken" disabled>2C</button>
+
+            <button class="seat" onclick="chooseSeat('2D')">2D</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <button class="seat taken" disabled>3A</button>
+
+            <button class="seat" onclick="chooseSeat('3B')">3B</button>
+
+            <span class="aisle"></span>
+
+            <button class="seat" onclick="chooseSeat('3C')">3C</button>
+
+            <button class="seat" onclick="chooseSeat('3D')">3D</button>
+
+        </div>
+
+
+        <br>
+
+        <button onclick="confirmBooking()">
+            Continue to Booking
+        </button>
+
+    `;
+
+}
+
+
+function chooseSeat(seat) {
+
+    selectedSeat = seat;
+
+    document.getElementById("selectedSeat").textContent =
+        "Selected seat: " + seat;
+
+}
+
+
+function confirmBooking() {
+
+    document.getElementById("flights").innerHTML = `
+
+        <div class="confirmation">
+
+            <h2>🎉 Booking Confirmed!</h2>
+
+            <p>Your TUI Airways flight is confirmed.</p>
+
+            <h3>✈️ Flight Information</h3>
+
+            <p><b>Flight:</b> ${selectedFlight.flightNumber}</p>
+
+            <p><b>Aircraft:</b> ${selectedFlight.aircraft}</p>
+
+            <p><b>From:</b> ${selectedFlight.from}</p>
+
+            <p><b>To:</b> ${selectedFlight.to}</p>
+
+            <p><b>Departure:</b> ${selectedFlight.time}</p>
+
+            <p><b>Seat:</b> ${selectedSeat}</p>
+
+            <button onclick="showBooking()">
+                Back to Booking
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+</script>
+
+</body>
+
+</html>

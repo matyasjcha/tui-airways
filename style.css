@@ -1,0 +1,310 @@
+body {
+    margin: 0;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background: lightblue;
+    color: #172b3a;
+}
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+header {
+    background: #123b63;
+    color: white;
+    padding: 20px 40px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+main {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.hero {
+    background: white;
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.hero h1 {
+    font-size: 42px;
+}
+
+button {
+    background: #1677d2;
+    color: white;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+
+.seat {
+    background: white;
+    color: #172b3a;
+    border: 2px solid #1677d2;
+}
+
+.seat:disabled {
+    background: #777;
+    color: white;
+    cursor: not-allowed;
+}
+.seat-row {
+    display: flex;
+    align-items: center;
+}
+
+.aisle {
+    width: 50px;
+    display: inline-block;
+}
+.main-title {
+    text-align: center;
+    font-size: 42px;
+    width: 100%;
+}
+body {
+    background: lightblue !important;
+}
+
+.flight-card {
+    background: white;
+}
+.flight-card {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 25px;
+}
+.flight-card {
+    border-radius: 18px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    text-align: center;
+    border-left: 8px solid #123b63;
+}
+.flight-card {
+    position: relative;
+    overflow: hidden;
+}
+.flight-card::after {
+    content: "";
+    display: block;
+    border-bottom: 2px dashed #123b63;
+    margin-top: 20px;
+}
+.flight-card h3 {
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+.flight-card h2 {
+    font-size: 28px;
+    letter-spacing: 1px;
+    margin: 18px 0;
+}
+.flight-card p {
+    font-size: 17px;
+    margin: 8px 0;
+}
+.flight-card h3 {
+    margin-top: 0;
+    color: #123b63;
+}
+
+.flight-card h2 {
+    font-size: 25px;
+    margin: 15px 0;
+}
+.flight-card p {
+    font-size: 16px;
+}
+.flight-card button {
+    margin-top: 15px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+}
+.home-title {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+.welcome-text {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+.book-button {
+    padding: 14px 35px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.site-footer {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.site-footer button {
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+}
+#loadingScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #00AEEF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#loadingScreen h1 {
+    color: white;
+    font-size: 42px;
+}
+#loadingScreen {
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+#loadingScreen.slide-out {
+    animation: slideOut 0.5s ease forwards;
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+.destination-card {
+    width: 90%;
+    max-width: 1100px;
+    min-height: 450px;
+    margin: 20px auto;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    background: #0077c8;
+}
+
+.destination-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://images.unsplash.com/photo-1539037116277-4db20889f2d4");
+    background-size: cover;
+    background-position: center;}
+.booking-options {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto 25px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 0 0 18px 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+.holiday-banner {
+    width: 100%;
+    max-width: 1200px;
+    height: 330px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+    border-radius: 0;
+}
+.booking-box {
+    width: 90%;
+    max-width: 1100px;
+    margin: 25px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+.home-banner {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+}
+.home-page {
+    position: relative;
+}
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.passenger-box {
+    width: 90%;
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 35px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    text-align: center;
+    box-sizing: border-box;
+}
+.passenger-box label {
+    display: block;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.passenger-box input {
+    width: 80%;
+    max-width: 400px;
+    padding: 12px;
+    border: 2px solid #d5dce3;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+.passenger-box button {
+    margin-top: 25px;
+    padding: 13px 30px;
+}

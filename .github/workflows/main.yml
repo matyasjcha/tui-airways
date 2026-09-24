@@ -15,6 +15,7 @@ permissions:
       - name: Get website files
         uses: actions/checkout@v4
               - name: Get Discord events
+             
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           DISCORD_SERVER_ID: 1541813781527658567

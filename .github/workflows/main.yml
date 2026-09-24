@@ -14,7 +14,7 @@ permissions:
     steps:
       - name: Get website files
         uses: actions/checkout@v4
-              - name: Get Discord events
+      - name: Get Discord events
              
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}

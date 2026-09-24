@@ -1,0 +1,32 @@
+name: Update Discord Events
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+      workflow_dispatch:
+
+permissions:
+  contents: write
+  jobs:
+  update-events:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get website files
+        uses: actions/checkout@v4
+              - name: Get Discord events
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_SERVER_ID: 1541813781527658567
+  run: |
+          curl -s \
+            -H "Authorization: Bot $DISCORD_BOT_TOKEN" \
+            "https://discord.com/api/v10/guilds/$DISCORD_SERVER_ID/scheduled-events?with_user_count=false" \
+            -o events.json
+                  - name: Save events
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add events.json
+          git diff --cached --quiet || git commit -m "Update Discord events"
+          git push
